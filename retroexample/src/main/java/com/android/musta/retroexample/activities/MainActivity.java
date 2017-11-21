@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getHeroes() {
+
         Retrofit retrofit = ApiClient.getRetroClient();
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
         Call<List<Hero>> call = apiInterface.getHeroes();
