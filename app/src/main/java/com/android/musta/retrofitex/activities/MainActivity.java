@@ -1,8 +1,10 @@
-package com.android.musta.retrofitex;
+package com.android.musta.retrofitex.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+
+import com.android.musta.retrofitex.Controller;
+import com.android.musta.retrofitex.R;
 
 public class MainActivity extends AppCompatActivity {
 
