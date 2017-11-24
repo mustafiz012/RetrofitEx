@@ -8,10 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ApiClient {
-    public static final String BASE_URL = "http://myradar.com.bd/api/car/last/position/";
     private static Retrofit retrofit = null;
 
-    public static Retrofit getRetroClient() {
+    public static Retrofit getRetroClient(String BASE_URL) {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)

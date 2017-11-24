@@ -1,6 +1,7 @@
 package com.android.musta.retroexample.rest;
 
 import com.android.musta.retroexample.models.LocationData;
+import com.android.musta.retroexample.utils.MyConstants;
 
 import java.util.Map;
 
@@ -13,10 +14,6 @@ import retrofit2.http.QueryMap;
  */
 
 public interface ApiInterface {
-    //base url
-    String BASE_URL = "http://myradar.com.bd/api/";
-
-    //specific api endpoint
-    @GET("59803f57dac1777e472e6322")
+    @GET("" + MyConstants.API_END_POINT_LAST_LOCATION)
     Call<LocationData> getLastLocation(@QueryMap Map<String, String> params);
 }

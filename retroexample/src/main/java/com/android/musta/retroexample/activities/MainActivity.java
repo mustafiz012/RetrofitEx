@@ -9,6 +9,7 @@ import com.android.musta.retroexample.models.Data;
 import com.android.musta.retroexample.models.LocationData;
 import com.android.musta.retroexample.rest.ApiClient;
 import com.android.musta.retroexample.rest.ApiInterface;
+import com.android.musta.retroexample.utils.MyConstants;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +31,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getLastLocation() {
-        Retrofit retrofit = ApiClient.getRetroClient();
+        Log.i(TAG, "getLastLocation: ");
+        Retrofit retrofit = ApiClient.getRetroClient(MyConstants.BASE_URL);
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
         Map<String, String> params = new HashMap<>();
         params.put("api_token", "9tHTR5Up1cVeK171D56uvZH4UfOEnnk00vaHoZyiIfnf3le3jF9BIGYHyKwJ");
-        Call<LocationData> call2 = apiInterface.getLastLocation(params);
-        call2.enqueue(new Callback<LocationData>() {
+        Call<LocationData> call = apiInterface.getLastLocation(params);
+        call.enqueue(new Callback<LocationData>() {
             @Override
             public void onResponse(Call<LocationData> call, Response<LocationData> response) {
                 if (response.isSuccessful()) {
@@ -43,12 +45,13 @@ public class MainActivity extends AppCompatActivity {
                     Double lat = data.getLat();
                     Double lng = data.getLng();
                     int time = data.getTime();
-                    Log.i(TAG, lat + "onResponse: " + lng);
+                    Log.i(TAG, lat + " :lat--lng: " + lng);
                 }
             }
 
             @Override
             public void onFailure(Call<LocationData> call, Throwable t) {
+                t.printStackTrace();
             }
         });
     }
