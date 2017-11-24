@@ -1,6 +1,6 @@
 package com.android.musta.retroexample.rest;
 
-import com.android.musta.retroexample.models.LocationData;
+import com.android.musta.retroexample.models.ParentModel;
 import com.android.musta.retroexample.utils.MyConstants;
 
 import java.util.Map;
@@ -15,5 +15,5 @@ import retrofit2.http.QueryMap;
 
 public interface ApiInterface {
     @GET("" + MyConstants.API_END_POINT_LAST_LOCATION)
-    Call<LocationData> getLastLocation(@QueryMap Map<String, String> params);
+    Call<ParentModel> getLastLocation(@QueryMap Map<String, String> params);
 }

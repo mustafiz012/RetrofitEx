@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.android.musta.retroexample.R;
-import com.android.musta.retroexample.models.Data;
-import com.android.musta.retroexample.models.LocationData;
+import com.android.musta.retroexample.models.DataModel;
+import com.android.musta.retroexample.models.ParentModel;
 import com.android.musta.retroexample.rest.ApiClient;
 import com.android.musta.retroexample.rest.ApiInterface;
 import com.android.musta.retroexample.utils.MyConstants;
@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
         Map<String, String> params = new HashMap<>();
         params.put("api_token", "9tHTR5Up1cVeK171D56uvZH4UfOEnnk00vaHoZyiIfnf3le3jF9BIGYHyKwJ");
-        Call<LocationData> call = apiInterface.getLastLocation(params);
-        call.enqueue(new Callback<LocationData>() {
+        Call<ParentModel> call = apiInterface.getLastLocation(params);
+        call.enqueue(new Callback<ParentModel>() {
             @Override
-            public void onResponse(Call<LocationData> call, Response<LocationData> response) {
+            public void onResponse(Call<ParentModel> call, Response<ParentModel> response) {
                 if (response.isSuccessful()) {
-                    Data data = response.body().data;
+                    DataModel data = response.body().data;
                     Double lat = data.getLat();
                     Double lng = data.getLng();
                     int time = data.getTime();
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<LocationData> call, Throwable t) {
+            public void onFailure(Call<ParentModel> call, Throwable t) {
                 t.printStackTrace();
             }
         });

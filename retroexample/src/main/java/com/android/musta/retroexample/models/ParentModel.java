@@ -3,18 +3,18 @@ package com.android.musta.retroexample.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LocationData {
+public class ParentModel {
 
     @SerializedName("status")
     public Integer status;
     @SerializedName("data")
-    public Data data;
+    public DataModel data;
 
     /**
      * @param status
      * @param data
      */
-    public LocationData(Integer status, Data data) {
+    public ParentModel(Integer status, DataModel data) {
         super();
         this.status = status;
         this.data = data;

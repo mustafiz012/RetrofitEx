@@ -2,7 +2,7 @@ package com.android.musta.retroexample.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Data {
+public class DataModel {
 
     @SerializedName("lat")
     private Double lat;
@@ -16,7 +16,7 @@ public class Data {
      * @param lng
      * @param lat
      */
-    public Data(Double lat, Double lng, Integer time) {
+    public DataModel(Double lat, Double lng, Integer time) {
         super();
         this.lat = lat;
         this.lng = lng;
