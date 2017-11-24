@@ -5,11 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.android.musta.retroexample.R;
-import com.android.musta.retroexample.models.Hero;
+import com.android.musta.retroexample.models.Data;
+import com.android.musta.retroexample.models.LocationData;
 import com.android.musta.retroexample.rest.ApiClient;
 import com.android.musta.retroexample.rest.ApiInterface;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,23 +26,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getHeroes();
+        getLastLocation();
     }
 
-    private void getHeroes() {
-
+    private void getLastLocation() {
         Retrofit retrofit = ApiClient.getRetroClient();
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        Call<List<Hero>> call = apiInterface.getHeroes();
-        call.enqueue(new Callback<List<Hero>>() {
+        Map<String, String> params = new HashMap<>();
+        params.put("api_token", "9tHTR5Up1cVeK171D56uvZH4UfOEnnk00vaHoZyiIfnf3le3jF9BIGYHyKwJ");
+        Call<LocationData> call2 = apiInterface.getLastLocation(params);
+        call2.enqueue(new Callback<LocationData>() {
             @Override
-            public void onResponse(Call<List<Hero>> call, Response<List<Hero>> response) {
-                Log.i(TAG, "onResponse: " + response);
+            public void onResponse(Call<LocationData> call, Response<LocationData> response) {
+                if (response.isSuccessful()) {
+                    Data data = response.body().data;
+                    Double lat = data.getLat();
+                    Double lng = data.getLng();
+                    int time = data.getTime();
+                    Log.i(TAG, lat + "onResponse: " + lng);
+                }
             }
 
             @Override
-            public void onFailure(Call<List<Hero>> call, Throwable t) {
-                t.printStackTrace();
+            public void onFailure(Call<LocationData> call, Throwable t) {
             }
         });
     }
