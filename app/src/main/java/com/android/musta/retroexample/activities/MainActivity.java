@@ -6,9 +6,14 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.View;
+import android.widget.PopupMenu;
 
 import com.android.musta.retroexample.R;
 import com.android.musta.retroexample.adapters.RecyclerAdapter;
+import com.android.musta.retroexample.interfaces.MyMenuItemClickListener;
+import com.android.musta.retroexample.interfaces.OnItemClickListener;
 import com.android.musta.retroexample.models.DataModel;
 import com.android.musta.retroexample.models.DatumModel;
 import com.android.musta.retroexample.models.DatumModelParent;
@@ -25,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener {
 
     private static final String TAG = "MainActivity";
     private RecyclerView recyclerView;
@@ -68,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "onResponse: " + response.raw());
                 if (response.isSuccessful()) {
                     dataModel = response.body().data;
-                    recyclerAdapter = new RecyclerAdapter(dataModel);
+                    recyclerAdapter = new RecyclerAdapter(dataModel, MainActivity.this, MainActivity.this);
                     recyclerView.setAdapter(recyclerAdapter);
                 }
             }
@@ -105,5 +110,24 @@ public class MainActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Log.i(TAG, "onItemClick: " + position);
+    }
+
+    @Override
+    public void onOptionClickListener(int position) {
+        Log.i(TAG, "onOptionClickListener: " + position);
+        showPopupOptions(recyclerView.getChildAt(position));
+    }
+
+    private void showPopupOptions(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.recycler_item_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new MyMenuItemClickListener(this));
+        popupMenu.show();
     }
 }
