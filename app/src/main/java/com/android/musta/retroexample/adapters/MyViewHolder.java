@@ -6,7 +6,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.musta.retroexample.R;
-import com.android.musta.retroexample.interfaces.OnItemClickListener;
 
 /**
  * Created by musta on 11/24/17.
@@ -16,20 +15,12 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     private static final String TAG = "MyViewHolder";
     public static TextView time, lat, lng;
     public static ImageButton clicking;
-    private OnItemClickListener clickListener = null;
 
-    public MyViewHolder(final View itemView, OnItemClickListener listener) {
+    public MyViewHolder(final View itemView) {
         super(itemView);
         time = itemView.findViewById(R.id.time);
         lat = itemView.findViewById(R.id.lat);
         lng = itemView.findViewById(R.id.lng);
         clicking = itemView.findViewById(R.id.clicking);
-        this.clickListener = listener;
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickListener.onItemClick(getAdapterPosition());
-            }
-        });
     }
 }

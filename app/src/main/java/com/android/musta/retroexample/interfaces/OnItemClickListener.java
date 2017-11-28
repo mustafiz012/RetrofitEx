@@ -1,11 +1,13 @@
 package com.android.musta.retroexample.interfaces;
 
+import android.view.View;
+
 /**
  * Created by musta on 11/27/17.
  */
 
 public interface OnItemClickListener {
-    void onItemClick(int position);
+    void onItemClick(View view);
 
-    void onOptionClickListener(int position);
+    void onOptionClickListener(View view);
 }

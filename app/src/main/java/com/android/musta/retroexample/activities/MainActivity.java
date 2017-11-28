@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.android.musta.retroexample.R;
 import com.android.musta.retroexample.adapters.RecyclerAdapter;
@@ -113,14 +114,15 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     @Override
-    public void onItemClick(int position) {
-        Log.i(TAG, "onItemClick: " + position);
+    public void onItemClick(View view) {
+        int position = (int) view.getTag();
+        //Log.i(TAG, "onItemClick: " + position);
+        Toast.makeText(this, position + ". " + dataModel.get(position).getLat(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onOptionClickListener(int position) {
-        Log.i(TAG, "onOptionClickListener: " + position);
-        showPopupOptions(recyclerView.getChildAt(position));
+    public void onOptionClickListener(View view) {
+        showPopupOptions(view);
     }
 
     private void showPopupOptions(View view) {
